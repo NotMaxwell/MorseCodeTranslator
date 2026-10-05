@@ -7,10 +7,10 @@
 )]
 #![deny(clippy::large_stack_frames)]
 
-use MorseCodeTranslator::morse::{
+use morse_code_translator::morse::{
     self, CHAR_GAP, DEBOUNCE, MAX_SYMBOLS, MorseEvent, Symbol, WORD_GAP,
 };
-use MorseCodeTranslator::sh1106::{self, Sh1106};
+use morse_code_translator::sh1106::{self, Sh1106};
 use defmt::{error, info, warn};
 use embassy_executor::Spawner;
 use embassy_sync::blocking_mutex::raw::CriticalSectionRawMutex;

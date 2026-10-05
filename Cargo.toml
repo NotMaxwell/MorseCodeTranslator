@@ -14,6 +14,7 @@ harness = false
 name    = "hello_test"
 
 [lib]
+name = "morse_code_translator"
 test = false
 
 [dependencies]

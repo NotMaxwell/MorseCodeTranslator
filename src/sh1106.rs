@@ -21,6 +21,9 @@ const DATA: u8 = 0x40;
 /// The SH1106 has 132 columns of RAM; the 128 visible ones start at column 2.
 const COLUMN_OFFSET: u8 = 2;
 
+/// One page of pixel data plus the leading data-control byte.
+const PAGE_PACKET_LEN: usize = WIDTH + 1;
+
 const INIT: &[u8] = &[
     0xAE, // display off
     0xD5, 0x80, // clock divide / oscillator
@@ -96,7 +99,7 @@ impl<'a, I: I2c> Sh1106<'a, I> {
     /// Send the framebuffer to the panel, one 128-byte page per I2C write.
     /// The SH1106 has no auto-wrapping across pages, so each page is addressed explicitly.
     pub async fn flush(&mut self) -> Result<(), I::Error> {
-        let mut packet = [0u8; 1 + WIDTH];
+        let mut packet: [u8; PAGE_PACKET_LEN] = [0; PAGE_PACKET_LEN];
         packet[0] = DATA;
         for page in 0..HEIGHT / 8 {
             self.command(0xB0 | page as u8).await?; // page address
