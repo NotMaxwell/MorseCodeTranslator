@@ -31,6 +31,11 @@ rtt-target       = { version = "0.6.2", features = ["defmt"] }
 
 critical-section = "1.2.0"
 static_cell      = "2.1.1"
+embassy-sync = { version = "0.8", features = ["defmt"] }
+embassy-futures = "0.1"
+heapless = "0.9"
+embedded-graphics = "0.8"
+embedded-hal-async = "1.0"
 
 [dev-dependencies]
 embedded-test = { version = "0.7.1", features = [
